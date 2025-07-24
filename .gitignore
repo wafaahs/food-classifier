@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.env
+.venv
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/
+
+# Models
+models/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# VSCode / IDEs
+.vscode/
+.idea/
+
+# PyTorch
+*.pt
+*.pth
+
+# Streamlit
+.streamlit/
+
+# Archive
+*.tar.gz
+
+#Logs
+logs/
