@@ -28,8 +28,8 @@ food-image-classifier/
 
 ### ✅ 1. Clone the Repository
 ```bash
-git clone <your-github-repo-url>
-cd food-image-classifier
+git clone https://github.com/wafaahs/food-classifier.git
+cd food-classifier
 ```
 
 ### ✅ 2. Set Up a Virtual Environment with Python 3.10 or 3.11
