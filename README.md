@@ -13,9 +13,18 @@ food-image-classifier/
 │       ├── images_split/         # Will contain train/ and test/ after splitting
 │       ├── meta/                 # Contains train.txt and test.txt split info
 ├── models/
-│   └── (empty initially; model will be saved here)
+│   ├── checkpoints/              # Contains checkpoint subdirs by config
+│   └── final/                    # Stores final trained models
+├── logs/                         # Contains training logs and summaries
+├── utils/
+│   ├── data_loader.py
+│   ├── logger.py
+│   ├── model_builder.py
+│   ├── trainer.py
+│   └── validator.py
+├── config.py                     # CLI config parser
 ├── split_dataset.py              # Script to create train/test folders
-├── train.py
+├── train.py                      # Main training entrypoint
 ├── predict.py *(to be added)*
 ├── app.py *(to be added)*
 ├── requirements.txt
@@ -52,6 +61,9 @@ Or use the `requirements.txt`:
 torch==2.2.2
 torchvision==0.17.2
 torchaudio==2.2.2
+numpy==1.26.4
+pillow==10.3.0
+tqdm==4.66.4
 streamlit==1.35.0
 ```
 
@@ -97,19 +109,35 @@ data/food-101/images_split/train/
 Then update `DATA_DIR` in `train.py` to point to `images_split`:
 ```python
 DATA_DIR = "data/food-101/images_split"
+
 ---
 
 ## 🚀 Train the Model
 ```bash
-python train.py
+python train.py --epochs 10 --batch_size 64 --lr 0.0005 --optimizer sgd
 ```
+### 🔧 Command-Line Options
+You can pass the following optional arguments to customize training:
 
-This will train a ResNet18 model and save it to:
-```
-models/food101_resnet.pth
-```
+- `--epochs`: number of training epochs (default: 5)
+- `--batch_size`: mini-batch size (default: 32)
+- `--lr`: learning rate (default: 0.001)
+- `--optimizer`: optimization algorithm (`adam` or `sgd`, default: `adam`)
 
-During training, the script now also evaluates **validation accuracy** at the end of each epoch and prints it to the console.
+> If omitted, the script will fall back to defaults defined in `config.py`.
+
+- Resumes from last checkpoint if available
+- Logs progress to console and `logs/`
+- Saves final model to `models/final/`
+- Outputs epoch summaries in CSV format
+
+---
+
+## 📅 Output Structure
+- Logs: `logs/training_<timestamp>.log`
+- Summary CSV: `logs/summary_<timestamp>.csv`
+- Checkpoints: `models/checkpoints/e{epochs}_b{batch}_opt_lr.../`
+- Final model: `models/final/e10_b64_sgd_lr0p0005_resnet.pth`
 
 ---
 
@@ -117,5 +145,6 @@ During training, the script now also evaluates **validation accuracy** at the en
 - `predict.py` for inference
 - `app.py` with Streamlit UI
 - GitHub-ready visual demo
+
 
 Stay tuned!
