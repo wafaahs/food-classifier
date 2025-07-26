@@ -1,6 +1,6 @@
 import argparse
 
-def get_config():
+def get_config(argv=None):
     parser = argparse.ArgumentParser(
         description="Train a ResNet18 model on food images with configurable hyperparameters.\n\n"
                     "Example usage:\n"
@@ -12,4 +12,4 @@ def get_config():
     parser.add_argument("--epochs", type=int, default=5, help="Number of training epochs (default: 5)")
     parser.add_argument("--lr", type=float, default=0.001, help="Learning rate (default: 0.001)")
     parser.add_argument("--optimizer", choices=["adam", "sgd"], default="adam", help="Optimizer to use (default: adam)")
-    return parser.parse_args()
+    return parser.parse_args(argv)

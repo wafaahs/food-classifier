@@ -22,6 +22,13 @@ food-image-classifier/
 │   ├── model_builder.py
 │   ├── trainer.py
 │   └── validator.py
+├── tests/
+│   ├── __init__.py
+│   └── test_config.py            # Unit testing Configs
+│   └── test_utils.py             # Unit testing Utils
+│   └── test_data_loader.py       # Unit testing for data loading
+│   └── test_logger.py            # Unit testing for logging logic
+│   └── test_predict.py           # Unit testing for predictions
 ├── config.py                     # CLI config parser
 ├── split_dataset.py              # Script to create train/test folders
 ├── train.py                      # Main training entrypoint
